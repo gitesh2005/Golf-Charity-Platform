@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
-const ADMIN_EMAIL = "rajaramrawat2003@gmail.com";
+const ADMIN_EMAIL = "thepromptist005@gmail.com";
 
 export async function addCharity(formData: FormData) {
   const supabase = await createClient();
