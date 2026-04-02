@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { DashboardClient } from "@/components/dashboard/dashboard-client";
 
-const ADMIN_EMAIL = "rajaramrawat2003@gmail.com";
+const ADMIN_EMAIL = "thepromptist005@gmail.com";
 
 export default async function DashboardPage() {
   const supabase = await createClient();

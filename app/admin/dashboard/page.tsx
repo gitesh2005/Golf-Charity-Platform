@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { AdminDashboardClient } from "@/components/admin/admin-dashboard-client";
 import { addCharity, deleteCharity, runDraw } from "./actions";
 
-const ADMIN_EMAIL = "rajaramrawat2003@gmail.com";
+const ADMIN_EMAIL = "thepromptist005@gmail.com";
 
 export default async function AdminDashboardPage() {
   const supabase = await createClient();
