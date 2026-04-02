@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { DashboardClient } from "@/components/dashboard/dashboard-client";
 
+const ADMIN_EMAIL = "rajaramrawat2003@gmail.com";
+
 export default async function DashboardPage() {
   const supabase = await createClient();
 
@@ -9,31 +11,37 @@ export default async function DashboardPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Agar user login nahi hai to login page pe bhejo
   if (!user) {
     redirect("/auth/login");
   }
 
-  // Fetch user's scores
+  // Agar user admin hai to admin dashboard pe bhejo
+  if (user.email === ADMIN_EMAIL) {
+    redirect("/admin/dashboard");
+  }
+
+  // User ke scores fetch karo
   const { data: scores } = await supabase
     .from("scores")
     .select("*")
     .eq("user_id", user.id)
     .order("played_at", { ascending: false });
 
-  // Fetch all charities
+  // Saari charities fetch karo
   const { data: charities } = await supabase
     .from("charities")
     .select("*")
     .order("name");
 
-  // Fetch user's charity selection
+  // User ki selected charity fetch karo
   const { data: userCharity } = await supabase
     .from("user_charity")
     .select("*, charities(*)")
     .eq("user_id", user.id)
     .single();
 
-  // Fetch user's subscription
+  // User ki subscription fetch karo
   const { data: subscription } = await supabase
     .from("subscriptions")
     .select("*")
